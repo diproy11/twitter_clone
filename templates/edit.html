@@ -1,0 +1,35 @@
+{% extends "base.html" %} {%block content%} 
+{% load static %}
+<section class="content">
+    <div class= 'head'>
+        <a class= "head_a" href="/"><img class= "head_img" src="{% static 'img/techis-logo.png' %}"> </a>
+        <h3>Edit</h3>
+    </div>
+    <section class="post_edit_form">
+        <form action = "/edit/{{post.id}}/" method= "POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Name" value="{{post.name}}" required>
+            <textarea name="body" placeholder="Tell Us anythng" required>{{post.body}}</textarea><br><br>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="image" style="width: 30%">
+            {% endif %}
+            <br><br>
+            <input type="file" id="myfile" name="image" />
+            <div class="btn"><a class="cancel" href="/">
+                <input type="button" id="delete" value="Cancel" />
+            </a>
+            <input type="submit" value="Post">
+            </div>
+            
+        </form>
+    </section>
+    
+      
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.js" 
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+        crossorigin="anonymous"></script>
+        <script src="{% static 'js/posts.js' %}"></script>   
+</section>
+
+{%endblock%}
